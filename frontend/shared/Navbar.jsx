@@ -10,7 +10,7 @@ import {
 import { LogOut, User } from "lucide-react";
 const Navbar = () => {
   const role = "student";
-  const user = false;
+  const user = true;
   return (
     <div className="max-w-full flex justify-between items-center shadow-2xs">
       <div className="p-2.5">
