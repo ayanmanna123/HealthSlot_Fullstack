@@ -35,7 +35,7 @@ const HeroSection = () => {
       <div className="flex w-[50%]  shadow-lg border border-gray-200 pl-3 rounded-full items-center mx-auto gap-4 ">
         <input
           type="text"
-          placeholder="find your jobs"
+          placeholder="find your Doctor"
           className="outline-none border-none w-full h-6 "
         />
         <Button className={"rounded-r-full bg-[#6A38C2]"}>
@@ -49,7 +49,6 @@ const HeroSection = () => {
               key={index}
               className="rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition"
             >
-             
               <div
                 className={`flex items-center justify-center h-56 ${card.bg}`}
               >
@@ -60,7 +59,6 @@ const HeroSection = () => {
                 />
               </div>
 
-              
               <div className="p-6 bg-white">
                 <h3 className="text-lg font-semibold text-gray-900">
                   {card.title}
