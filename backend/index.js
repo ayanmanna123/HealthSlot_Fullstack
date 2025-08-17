@@ -9,6 +9,7 @@ import fs from "fs";
 import asyncHandler from "express-async-handler";
 import User from "./models/User.model.js";
 import router from "./routes/auth.route.js";
+import Doctor from "./routes/doctor.route.js";
 dotenv.config();
 
 const app = express();
@@ -71,6 +72,7 @@ app.use(
 );
 
 app.use("/api/v1/user", router);
+app.use("/api/v1/Doctor", Doctor);
 
 const server = async () => {
   try {
