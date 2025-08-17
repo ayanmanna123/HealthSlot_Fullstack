@@ -1,4 +1,5 @@
 import Doctor from "../model/Doctor.model.js";
+import User from "../model/UserModel.js";
 
 // ✅ Create a new doctor with timetable
 export const createDoctor = async (req, res) => {
@@ -8,14 +9,21 @@ export const createDoctor = async (req, res) => {
       degree,
       experience,
       description,
-      details, // User reference ID
+     
       clinicTime,
     } = req.body;
 
     // basic validation
-    if (!treatment || !degree || !experience || !details) {
+    if (!treatment || !degree || !experience ) {
       return res.status(400).json({
         message: "Treatment, degree, experience, and details are required",
+        success: false,
+      });
+    }
+      let user = await User.findOne({ auth0Id: req.oidc.user.sub });
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
         success: false,
       });
     }
@@ -25,8 +33,8 @@ export const createDoctor = async (req, res) => {
       degree,
       experience,
       description,
-      details,
-      clinicTime, // array of days with startTime & endTime
+      details:user,
+      clinicTime, 
     });
 
     const newdoctor = await Doctor.create(doctor);

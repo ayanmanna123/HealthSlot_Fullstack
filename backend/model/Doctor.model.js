@@ -21,20 +21,18 @@ const DoctorSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-
-  
   clinicTime: [
     {
       day: {
         type: String,
-        enum: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],  
+        enum: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
       },
       startTime: {
-        type: String,  
+        type: String,
         required: true,
       },
       endTime: {
-        type: String, 
+        type: String,
         required: true,
       },
     },
