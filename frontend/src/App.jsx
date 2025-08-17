@@ -15,6 +15,11 @@ function App() {
       path: "/Home",
       element: <Home />,
     },
+     {
+      path: "/callback",
+      element: <Home />,
+    },
+    
     {
       path: "/doctor",
       element:<Doctor/>,
