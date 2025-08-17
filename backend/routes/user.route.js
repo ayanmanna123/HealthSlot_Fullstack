@@ -2,6 +2,7 @@ import express from "express";
 
 import pkg from "express-openid-connect";
 import { updateprofilr } from "../controllers/user.controllers.js";
+import { createDoctor } from "../controllers/doctor.controllers.js";
 const { requiresAuth } = pkg;
 const userRoute = express.Router();
 userRoute.route("/updateProfile").put(
@@ -11,6 +12,14 @@ userRoute.route("/updateProfile").put(
     next();
   },
    updateprofilr
+);
+userRoute.route("/createDoctor").post(
+  requiresAuth(),
+  (req, res, next) => {
+    req.id = req.oidc.user.sub;
+    next();
+  },
+    createDoctor
 );
 
 // userRoute.route("/getalljob").get(isAuthenticated, getAlljobs);
