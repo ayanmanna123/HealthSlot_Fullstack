@@ -7,7 +7,8 @@ import connectToMongo from "./utils/db.js";
 import fs from "fs";
 
 import asyncHandler from "express-async-handler";
-import User from "./model/UserModel.js";
+import User from "./models/User.model.js";
+import router from "./routes/auth.route.js";
 dotenv.config();
 
 const app = express();
@@ -69,17 +70,7 @@ app.use(
   })
 );
 
-const routeFiles = fs.readdirSync("./routes");
-
-routeFiles.forEach((file) => {
-  import(`./routes/${file}`)
-    .then((route) => {
-      app.use("/api/v1/", route.default);
-    })
-    .catch((error) => {
-      console.log("Error importing route", error);
-    });
-});
+app.use("/api/v1/user", router);
 
 const server = async () => {
   try {
