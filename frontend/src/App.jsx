@@ -1,10 +1,10 @@
 import "./App.css";
 import { Button } from "@/components/ui/button";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "../pages/Home";
-import Doctor from "../pages/Doctor";
-import Browse from "../pages/Browse";
-import Profile from "../pages/Profile";
+import Home from "./pages/Home";
+import Doctor from "./pages/Doctor";
+import Browse from "./pages/Browse";
+import Profile from "./pages/Profile";
 function App() {
   const approuter = createBrowserRouter([
     {

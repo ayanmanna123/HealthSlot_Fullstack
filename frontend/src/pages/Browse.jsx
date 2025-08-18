@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../shared/Navbar";
-import { Button } from "../src/components/ui/button";
+import { Button } from "../components/ui/button";
 
 const Browse = () => {
   const doctors = [

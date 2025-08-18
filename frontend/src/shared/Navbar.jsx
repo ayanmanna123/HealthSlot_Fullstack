@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../src/components/ui/button";
+import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
