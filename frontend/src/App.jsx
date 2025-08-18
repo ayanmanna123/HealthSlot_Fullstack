@@ -34,7 +34,7 @@ function App() {
       element: <Profile />,
     },
     {
-      path: "/DoctorProfile",
+      path: "/DoctorProfile/:id",
       element: <DoctorProfile />,
     },
   ]);

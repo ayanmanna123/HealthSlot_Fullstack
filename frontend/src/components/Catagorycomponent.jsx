@@ -17,11 +17,14 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoding } from "../Redux/authSilce";
 import { setdoctor } from "../Redux/doctorSlice";
+import { useNavigate } from "react-router-dom";
 
 const Catagorycomponent = () => {
   const catagory = [];
   const dispatch = useDispatch();
   const { doctor } = useSelector((store) => store.doctor);
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -56,42 +59,45 @@ const Catagorycomponent = () => {
       <Carousel className="relative">
         <CarouselContent>
           {doctor.map((cat, index) => (
-            <CarouselItem
+            <div
               key={index}
-              className="basis-3/4 md:basis-1/3 lg:basis-1/4 px-3"
+              onClick={() => navigate(`/DoctorProfile/${cat._id}`)}
             >
-              <Card className="shadow-none border-none p-7">
-                 
-                <CardHeader className="p-0">
-                  <img
-                    src={
-                      cat?.userId?.profilePicture ||
-                      `https://api.dicebear.com/6.x/initials/svg?seed=${cat?.userId?.name}`
-                    }
-                    alt={cat?.title}
-                    className="w-35 h-35 object-cover rounded-full"
-                  />
-                  <div className="text-2xl font-bold">{cat?.userId?.name}</div>
-                </CardHeader>
+              <CarouselItem className="basis-3/4 md:basis-1/3 lg:basis-1/4 px-3">
+                <Card className="shadow-none border-none p-7">
+                  <CardHeader className="p-0">
+                    <img
+                      src={
+                        cat?.userId?.profilePicture ||
+                        `https://api.dicebear.com/6.x/initials/svg?seed=${cat?.userId?.name}`
+                      }
+                      alt={cat?.title}
+                      className="w-35 h-35 object-cover rounded-full"
+                    />
+                    <div className="text-2xl font-bold">
+                      {cat?.userId?.name}
+                    </div>
+                  </CardHeader>
 
-                {/* Text */}
-                <CardContent className="p-0 mt-3">
-                  <CardTitle className="text-2xl">
-                    {cat?.specialization}
-                  </CardTitle>
-                  <div className="flex items-center gap-1.5">
-                    <div>Fees:</div>
-                    <div>{cat?.fees}</div>
-                  </div>
+                  {/* Text */}
+                  <CardContent className="p-0 mt-3">
+                    <CardTitle className="text-2xl">
+                      {cat?.specialization}
+                    </CardTitle>
+                    <div className="flex items-center gap-1.5">
+                      <div>Fees:</div>
+                      <div>{cat?.fees}</div>
+                    </div>
 
-                  <div className="flex items-center font-bold gap-1.5">
-                    <div>{cat?.availableTime?.start}</div>
-                    <span>to</span>
-                    <div>{cat?.availableTime?.end}</div>
-                  </div>
-                </CardContent>
-              </Card>
-            </CarouselItem>
+                    <div className="flex items-center font-bold gap-1.5">
+                      <div>{cat?.availableTime?.start}</div>
+                      <span>to</span>
+                      <div>{cat?.availableTime?.end}</div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            </div>
           ))}
         </CarouselContent>
 
