@@ -11,6 +11,7 @@ import User from "./models/User.model.js";
 import router from "./routes/auth.route.js";
 import Doctor from "./routes/doctor.route.js";
 import Appointment from "./routes/appointment.route.js";
+import review from "./routes/review.route.js";
 dotenv.config();
 
 const app = express();
@@ -75,6 +76,7 @@ app.use(
 app.use("/api/v1/user", router);
 app.use("/api/v1/Doctor", Doctor);
 app.use("/api/v1/Appointment", Appointment);
+app.use("/api/v1/review", review);
 const server = async () => {
   try {
     await connectToMongo();
