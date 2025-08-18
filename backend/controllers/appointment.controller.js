@@ -40,7 +40,16 @@ export const patientappointments = async (req, res) => {
       });
     }
 
-    const appointments = await Appointment.find({ patientId: user._id });
+    const appointments = await Appointment.find({ patientId: user._id })
+      .sort({ createdAt: -1 })
+      .populate([
+        { path: "patientId" },
+        {
+          path: "doctorId",
+          populate: { path: "userId" }, // nested populate inside doctor
+        },
+      ]);
+
     if (!appointments) {
       return res.status(400).json({
         message: "user not find",
@@ -121,7 +130,7 @@ export const deleteappointment = async (req, res) => {
       });
     }
     const appointmentfirst = await Appointment.findOne({ _id: appointmentID });
-    if (!appointmentfirst ) {
+    if (!appointmentfirst) {
       return res.status(200).json({
         message: "appoinment not found",
         success: true,
@@ -129,7 +138,7 @@ export const deleteappointment = async (req, res) => {
     }
     await Appointment.findByIdAndDelete({ _id: appointmentID });
     const appointment = await Appointment.findOne({ _id: appointmentID });
-    if (!appointment ) {
+    if (!appointment) {
       return res.status(200).json({
         message: "appoinment calceed successfully",
         success: true,
