@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -8,9 +8,39 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { LogOut, User } from "lucide-react";
+import axios from "axios";
+import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoding, setuser } from "@/Redux/authSilce.js";
 const Navbar = () => {
   const role = "student";
-  const user = false;
+  const dispatch = useDispatch();
+  const { loding, user } = useSelector((store) => store.auth);
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        dispatch(setLoding(true));
+        const res = await axios.get(
+          "http://localhost:5000/api/v1/user/getUserDetails",
+          {
+            withCredentials: true,
+          }
+        );
+
+        if (res.data.success) {
+          dispatch(setuser(res.data.user));
+        }
+      } catch (error) {
+        console.error("Auth check failed:", error);
+        dispatch(setuser(null)); // not logged in
+      } finally {
+        dispatch(setLoding(false));
+      }
+    };
+
+    fetchUser();
+  }, [dispatch]);
+
   return (
     <div className="max-w-full flex justify-between items-center shadow-2xs">
       <div className="p-2.5">
@@ -52,10 +82,11 @@ const Navbar = () => {
 
         {!user ? (
           <div className="items-center gap-2 flex">
-            <Link to="/login">
+            <Link to="http://localhost:5000/login">
               <Button variant="outline">Login</Button>
             </Link>
-            <Link to="/signup">
+
+            <Link to="http://localhost:5000/login">
               <Button className="bg-[#6A38C2] hover:bg-[#5b30a6]">
                 Sign up
               </Button>
@@ -97,7 +128,9 @@ const Navbar = () => {
                 </div>
                 <div className="flex w-fit items-center gap-2 cursor-pointer">
                   <LogOut />
-                  <Button variant="link">Logout</Button>
+                  <Link to="http://localhost:5000/logout">
+                    <Button variant="link">Logout</Button>
+                  </Link>
                 </div>
               </div>
             </PopoverContent>

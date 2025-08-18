@@ -66,12 +66,14 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL,
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: [
+    "http://localhost:5173",
+    "https://jobflux-full-stack-8sja.vercel.app",
+  ],
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 app.use("/api/v1/user", router);
 app.use("/api/v1/Doctor", Doctor);

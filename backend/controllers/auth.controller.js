@@ -33,3 +33,22 @@ export const updateProfile = async (req, res) => {
     });
   }
 };
+
+export const getUserDetails = async (req, res) => {
+  try {
+    let user = await User.findOne({ auth0Id: req.oidc.user.sub });
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+        success: false,
+      });
+    }
+    return res.status(200).json({
+      message: "user get success fully",
+      user,
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

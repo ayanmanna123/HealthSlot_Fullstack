@@ -1,5 +1,8 @@
 import express from "express";
-import { updateProfile } from "../controllers/auth.controller.js";
+import {
+  getUserDetails,
+  updateProfile,
+} from "../controllers/auth.controller.js";
 
 import pkg from "express-openid-connect";
 const { requiresAuth } = pkg;
@@ -14,4 +17,12 @@ router.route("/updateProfile").put(
   updateProfile
 );
 
+router.route("/getUserDetails").get(
+  requiresAuth(),
+  (req, res, next) => {
+    req.id = req.oidc.user.sub;
+    next();
+  },
+  getUserDetails
+);
 export default router;
