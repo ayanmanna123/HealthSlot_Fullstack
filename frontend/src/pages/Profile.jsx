@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import Navbar from "../shared/Navbar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "../components/ui/button";
-import { Contact, Mail, Pen } from "lucide-react";
- 
+import { Calendar, Contact, Mail, MapPin, Pen } from "lucide-react";
 
 import UPdtaeprofiledilog from "./UPdtaeprofiledilog";
 import { useSelector } from "react-redux";
 import { store } from "@/Redux/store";
+import AppionmentStatus from "../components/AppionmentStatus";
 
 // const skilles = ["React", "Node.js", "Tailwind", "MongoDB"];
 
@@ -45,18 +45,38 @@ const Profile = () => {
             <Pen />
           </Button>
         </div>
-        <div>
-          <div className="gap-3 pl-5">
-            <div className="flex items-center gap-3">
+        <div className="gap-3.5">
+          <div className="gap-4 pl-5">
+            <div className="flex items-center gap-3 p-1.5">
               <Mail />
               <span>{user?.email}</span>
             </div>
-            <div className="flex gap-3 items-center">
+            <div className="flex gap-3 items-center p-1.5">
               <Contact />
               <span>{user?.phone}</span>
             </div>
+            <div className="flex gap-3 items-center p-1.5">
+              <MapPin />
+              <span>{user?.address}</span>
+            </div>
+            <div className="flex gap-3 items-center p-1.5 ">
+              <Calendar />
+              <span>
+                {user?.createdAt
+                  ? new Date(user.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  : "N/A"}
+              </span>
+            </div>
           </div>
         </div>
+      </div>
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl ">
+        <h1 className={"font-bold"}>applied jobs</h1>
+         <AppionmentStatus/>
       </div>
       <UPdtaeprofiledilog open={open} setopen={setopen} />
     </div>

@@ -13,7 +13,6 @@ import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoding, setuser } from "@/Redux/authSilce.js";
 const Navbar = () => {
-  
   const dispatch = useDispatch();
   const { loding, user } = useSelector((store) => store.auth);
   const role = user?.role;
@@ -124,14 +123,10 @@ const Navbar = () => {
               </div>
               <div className="flex flex-col my-2 text-gray-600">
                 <div className="flex w-fit items-center gap-2 cursor-pointer">
-                  {role === "student" && (
-                    <>
-                      <User />
-                      <Button variant="link">
-                        <Link to={"/profile"}>view profile</Link>
-                      </Button>
-                    </>
-                  )}
+                  <User />
+                  <Button variant="link">
+                    <Link to={"/profile"}>view profile</Link>
+                  </Button>
                 </div>
                 <div className="flex w-fit items-center gap-2 cursor-pointer">
                   <LogOut />
