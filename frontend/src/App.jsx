@@ -5,32 +5,37 @@ import Home from "./pages/Home";
 import Doctor from "./pages/Doctor";
 import Browse from "./pages/Browse";
 import Profile from "./pages/Profile";
+import DoctorProfile from "./pages/DoctorProfile ";
 function App() {
   const approuter = createBrowserRouter([
     {
       path: "/",
       element: <Home />,
     },
-     {
+    {
       path: "/Home",
       element: <Home />,
     },
-     {
+    {
       path: "/callback",
       element: <Home />,
     },
-    
+
     {
       path: "/doctor",
-      element:<Doctor/>,
+      element: <Doctor />,
     },
-     {
+    {
       path: "/Browse",
-      element:<Browse/>,
+      element: <Browse />,
     },
-     {
+    {
       path: "/profile",
-      element:<Profile/>,
+      element: <Profile />,
+    },
+    {
+      path: "/DoctorProfile",
+      element: <DoctorProfile />,
     },
   ]);
   return (

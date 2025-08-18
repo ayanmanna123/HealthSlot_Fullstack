@@ -67,7 +67,8 @@ export const createDoctor = async (req, res) => {
 
 export const getAllDoctor = async (req, res) => {
   try {
-    const AllDoctor = await Doctor.find();
+    const AllDoctor = await Doctor.find().sort({ createdAt: -1 })
+      .populate({ path: "userId", options: { sort: { createdAt: -1 } } });;
     if (!AllDoctor) {
       return res.status(400).json({
         message: "DOctor not availble",
