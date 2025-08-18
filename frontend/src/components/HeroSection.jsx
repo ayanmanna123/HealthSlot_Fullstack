@@ -25,14 +25,10 @@ const HeroSection = () => {
   ];
   return (
     <section className="flex flex-col items-center justify-center text-center py-10 px-6 bg-white">
-      <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-snug">
-        Book, Connect & <br /> Care with{" "}
-        <span className="text-purple-600">HealthSlot</span>
-      </h1>
       <p className="mt-4 text-gray-600 text-lg max-w-2xl">
         Your health, your time — book doctor appointments with ease.
       </p>
-      <div className="flex w-[50%]  shadow-lg border border-gray-200 pl-3 rounded-full items-center mx-auto gap-4 ">
+      <div className="flex w-[40%]  shadow-lg border border-gray-200 pl-3 rounded-full items-center mx-auto gap-4 ">
         <input
           type="text"
           placeholder="find your Doctor"

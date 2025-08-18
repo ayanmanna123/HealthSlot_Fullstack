@@ -1,22 +1,24 @@
 import React from "react";
 import { Button } from "../src/components/ui/button";
 import { Link } from "react-router-dom";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
 import { LogOut, User } from "lucide-react";
 const Navbar = () => {
   const role = "student";
-  const user = true;
+  const user = false;
   return (
     <div className="max-w-full flex justify-between items-center shadow-2xs">
       <div className="p-2.5">
-        <h1 className="text-red-500 font-bold text-2xl">
-          Health <span className=" text-blue-700">Slot</span>
-        </h1>
+        <img
+          src="https://files.softicons.com/download/application-icons/circle-icons-add-on-2-by-martz90/png/512x512/health.png"
+          alt="logo"
+          className="h-10 w-10 "
+        />
       </div>
       <div className="p-2.5 gap-1.5 flex justify-center items-center">
         <ul className="flex front-medium items-center gap-5">
@@ -65,10 +67,7 @@ const Navbar = () => {
               <Avatar className="cursor-pointer">
                 <AvatarImage
                   className="object-cover"
-                  src={
-                     
-                    `https://api.dicebear.com/6.x/initials/svg?seed=${"ayan"}`
-                  }
+                  src={`https://api.dicebear.com/6.x/initials/svg?seed=${"ayan"}`}
                 />
               </Avatar>
             </PopoverTrigger>
@@ -89,7 +88,7 @@ const Navbar = () => {
                 <div className="flex w-fit items-center gap-2 cursor-pointer">
                   {role === "student" && (
                     <>
-                      <User/>
+                      <User />
                       <Button variant="link">
                         <Link to={"/profile"}>view profile</Link>
                       </Button>
