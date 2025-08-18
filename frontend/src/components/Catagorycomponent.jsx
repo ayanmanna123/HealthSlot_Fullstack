@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -13,51 +13,36 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoding } from "../Redux/authSilce";
+import { setdoctor } from "../Redux/doctorSlice";
 
 const Catagorycomponent = () => {
-  const catagory = [
-    {
-      img: "https://www.practostatic.com/consumer-home/desktop/images/1597423628/dweb_instant_video_consulation.png",
-      title: "Gynecologist/Obstetrician",
-      description: "Explore for women’s health, pregnancy and infertility treatments",
-    },
-    {
-      img: "https://www.practostatic.com/consumer-home/desktop/images/1597423628/dweb_instant_video_consulation.png",
-      title: "Dietitian/Nutrition",
-      description: "Get guidance on eating right, weight management and sports nutrition",
-    },
-    {
-      img: "https://www.practostatic.com/consumer-home/desktop/images/1597423628/dweb_instant_video_consulation.png",
-      title: "Physiotherapist",
-      description: "Pulled a muscle? Get it treated by a trained physiotherapist",
-    },
-    {
-      img: "https://www.practostatic.com/consumer-home/desktop/images/1597423628/dweb_instant_video_consulation.png",
-      title: "General Surgeon",
-      description: "Need to get operated? Find the right surgeon",
-    },
-     {
-      img: "https://www.practostatic.com/consumer-home/desktop/images/1597423628/dweb_instant_video_consulation.png",
-      title: "Gynecologist/Obstetrician",
-      description: "Explore for women’s health, pregnancy and infertility treatments",
-    },
-    {
-      img: "https://www.practostatic.com/consumer-home/desktop/images/1597423628/dweb_instant_video_consulation.png",
-      title: "Dietitian/Nutrition",
-      description: "Get guidance on eating right, weight management and sports nutrition",
-    },
-    {
-      img: "https://www.practostatic.com/consumer-home/desktop/images/1597423628/dweb_instant_video_consulation.png",
-      title: "Physiotherapist",
-      description: "Pulled a muscle? Get it treated by a trained physiotherapist",
-    },
-    {
-      img: "https://www.practostatic.com/consumer-home/desktop/images/1597423628/dweb_instant_video_consulation.png",
-      title: "General Surgeon",
-      description: "Need to get operated? Find the right surgeon",
-    },
-  ];
+  const catagory = [];
+  const dispatch = useDispatch();
+  const { doctor } = useSelector((store) => store.doctor);
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:5000/api/v1/Doctor/getAllDoctor",
+          {
+            withCredentials: true,
+          }
+        );
 
+        if (res.data.success) {
+          console.log(res.data.AllDoctor);
+          dispatch(setdoctor(res.data.AllDoctor));
+        }
+      } catch (error) {
+        console.error("Auth check failed:", error);
+      }
+    };
+
+    fetchUser();
+  }, [dispatch]);
   return (
     <div className=" px-30 py-10 relative">
       {/* Heading */}
