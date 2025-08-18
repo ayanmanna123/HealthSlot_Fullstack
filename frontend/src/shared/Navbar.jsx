@@ -13,9 +13,10 @@ import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoding, setuser } from "@/Redux/authSilce.js";
 const Navbar = () => {
-  const role = "student";
+  
   const dispatch = useDispatch();
   const { loding, user } = useSelector((store) => store.auth);
+  const role = user?.role;
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -52,7 +53,7 @@ const Navbar = () => {
       </div>
       <div className="p-2.5 gap-1.5 flex justify-center items-center">
         <ul className="flex front-medium items-center gap-5">
-          {role === "requiter" ? (
+          {role === "patient" ? (
             <>
               {" "}
               <li>
@@ -98,7 +99,10 @@ const Navbar = () => {
               <Avatar className="cursor-pointer">
                 <AvatarImage
                   className="object-cover"
-                  src={`https://api.dicebear.com/6.x/initials/svg?seed=${"ayan"}`}
+                  src={
+                    user?.profilePicture ||
+                    `https://api.dicebear.com/6.x/initials/svg?seed=${user?.name}`
+                  }
                 />
               </Avatar>
             </PopoverTrigger>
@@ -108,7 +112,10 @@ const Navbar = () => {
                 <Avatar className="cursor-pointer">
                   <AvatarImage
                     className="object-cover"
-                    src={`https://api.dicebear.com/6.x/initials/svg?seed=${"ayan"}`}
+                    src={
+                      user?.profilePicture ||
+                      `https://api.dicebear.com/6.x/initials/svg?seed=${user?.name}`
+                    }
                   />
                 </Avatar>
                 <div>
