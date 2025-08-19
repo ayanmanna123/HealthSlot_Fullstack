@@ -24,9 +24,13 @@ const appointmentSchema = new mongoose.Schema({
     enum: ["pending", "confirmed", "cancelled", "completed"],
     default: "pending",
   },
+  rating: {
+    type: Number,
+    default: 0,
+  },
   reason: String,
   createdAt: { type: Date, default: Date.now },
 });
 
- const Appointment = mongoose.model("Appointment", appointmentSchema);
- export default Appointment
+const Appointment = mongoose.model("Appointment", appointmentSchema);
+export default Appointment;

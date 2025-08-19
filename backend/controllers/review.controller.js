@@ -23,6 +23,20 @@ export const addReview = async (req, res) => {
       });
     }
 
+     
+    const already = await Review.findOne({
+      doctorId,
+      patientId: user._id,
+    });
+
+    if (already) {
+      return res.status(400).json({
+        message: "You have already given a rating to this doctor",
+        success: false,
+      });
+    }
+
+     
     const review = await Review.create({
       patientId: user._id,
       doctorId,
@@ -30,16 +44,12 @@ export const addReview = async (req, res) => {
       comment,
     });
 
+    
     const reviews = await Review.find({ doctorId });
-    let avgRating = givenrating;
-    if (reviews.length > 0) {
-      avgRating =
-        reviews.reduce((acc, r) => acc + r.givenrating, 0) / reviews.length;
-    }
+    const avgRating =
+      reviews.reduce((acc, r) => acc + r.givenrating, 0) / reviews.length;
 
-    if (!isNaN(avgRating)) {
-      await Doctor.findByIdAndUpdate(doctorId, { rating: avgRating });
-    }
+    await Doctor.findByIdAndUpdate(doctorId, { rating: avgRating });
 
     return res.status(201).json({
       message: "Review submitted successfully",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -10,24 +10,62 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { useSelector } from "react-redux";
-
 import useGetAppoinment from "../hooks/useGetAppoinment";
+import { Button } from "./ui/button";
+import { Star } from "lucide-react";
+import axios from "axios";
+import { toast } from "sonner";
 
 const AppionmentStatus = () => {
   useGetAppoinment();
   const { patentappoinment } = useSelector((store) => store.appoinment);
+  const [selectedRating, setSelectedRating] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleRating = async (doctorId, rating) => {
+    setSelectedRating((prev) => ({ ...prev, [doctorId]: rating }));
+
+    try {
+      setSubmitting(true);
+      const res = await axios.post(
+        "http://localhost:5000/api/v1/review/addReview",
+        {
+          doctorId,
+          givenrating: rating,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (res.success) {
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message);
+      }
+      const data = res.data;
+
+      setSubmitting(false);
+    } catch (error) {
+      toast.error(error.message)
+      console.error("Error submitting review:", error);
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div>
       <Table>
-        <TableCaption>A list of your appoinment</TableCaption>
+        <TableCaption>A list of your appoinments</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Date</TableHead>
+            <TableHead>Date</TableHead>
             <TableHead>Time</TableHead>
-            <TableHead>Doctor Nmae</TableHead>
-            <TableHead>Catagory</TableHead>
-            <TableHead className="text-right">Status</TableHead>
+            <TableHead>Doctor Name</TableHead>
+            <TableHead>Category</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Give Rating</TableHead>
+            <TableHead className="text-right">Rating</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -37,7 +75,7 @@ const AppionmentStatus = () => {
               <TableCell>{cat?.time}</TableCell>
               <TableCell>{cat?.doctorId?.userId?.name}</TableCell>
               <TableCell>{cat?.doctorId?.specialization}</TableCell>
-              <TableCell className="text-right">
+              <TableCell>
                 <Badge
                   className={`${
                     cat?.status === "cancelled"
@@ -51,6 +89,26 @@ const AppionmentStatus = () => {
                 >
                   {cat?.status.toUpperCase()}
                 </Badge>
+              </TableCell>
+
+              <TableCell>
+                <div className="flex space-x-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star
+                      key={star}
+                      className={`h-5 w-5 cursor-pointer ${
+                        selectedRating[cat?.doctorId?._id] >= star
+                          ? "text-yellow-400 fill-yellow-400"
+                          : "text-gray-300"
+                      }`}
+                      onClick={() => handleRating(cat?.doctorId?._id, star)}
+                    />
+                  ))}
+                </div>
+              </TableCell>
+
+              <TableCell className="text-right">
+                {cat?.doctorId?.rating || "—"}
               </TableCell>
             </TableRow>
           ))}
