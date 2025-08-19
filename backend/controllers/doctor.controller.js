@@ -146,7 +146,9 @@ export const updateByAdmin = async (req, res) => {
 export const getAllDoctorByQuiry = async (req, res) => {
   try {
     const findElement = req.query.findElement || "" ;
-    const findDOctor = await Doctor.find({ specialization: findElement });
+    const findDOctor = await Doctor.find({ specialization: findElement }).sort({createdAt:-1}).populate({
+      path:"userId"
+    })
     return res.status(200).json({
       message: "doctor found ",
       findDOctor,
