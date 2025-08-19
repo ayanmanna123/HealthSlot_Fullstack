@@ -11,7 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useSelector } from "react-redux";
 
-import useGetAppoinment from "../../hooks/useGetAppoinment";
+import useGetAppoinment from "../hooks/useGetAppoinment";
 
 const AppionmentStatus = () => {
   useGetAppoinment();

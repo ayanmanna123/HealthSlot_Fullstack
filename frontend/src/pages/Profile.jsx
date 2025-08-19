@@ -9,8 +9,6 @@ import { useSelector } from "react-redux";
 import { store } from "@/Redux/store";
 import AppionmentStatus from "../components/AppionmentStatus";
 
-// const skilles = ["React", "Node.js", "Tailwind", "MongoDB"];
-
 const Profile = () => {
   const ishaveresume = true;
   let [open, setopen] = useState(false);
@@ -76,7 +74,7 @@ const Profile = () => {
       </div>
       <div className="max-w-4xl mx-auto bg-white rounded-2xl ">
         <h1 className={"font-bold"}>applied jobs</h1>
-         <AppionmentStatus/>
+        <AppionmentStatus />
       </div>
       <UPdtaeprofiledilog open={open} setopen={setopen} />
     </div>

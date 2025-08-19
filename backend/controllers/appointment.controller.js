@@ -1,4 +1,5 @@
 import Appointment from "../models/Appointment.model.js";
+import Doctor from "../models/Doctor.model.js";
 import User from "../models/User.model.js";
 
 export const Appointmentcreat = async (req, res) => {
@@ -144,6 +145,41 @@ export const deleteappointment = async (req, res) => {
         success: true,
       });
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getalldoctorappoinment = async (req, res) => {
+  try {
+    let user = await User.findOne({ auth0Id: req.oidc.user.sub });
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+        success: false,
+      });
+    }
+    const userId = user._id;
+    const doctor = await Doctor.findOne({ userId: userId });
+    if (!doctor) {
+      return res.status(400).json({
+        message: "doctor not find",
+        success: false,
+      });
+    }
+    const doctorId = doctor._id;
+    const allAppoinmentForDoctor = await Appointment.find({
+      doctorId: doctorId,
+    })
+      .sort({ createdAt: -1 })
+      .populate({
+        path: "patientId",
+      });
+    return res.status(200).json({
+      message: "get appoinment successfully",
+      allAppoinmentForDoctor,
+      success: true,
+    });
   } catch (error) {
     console.log(error);
   }

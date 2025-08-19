@@ -52,18 +52,16 @@ const Navbar = () => {
       </div>
       <div className="p-2.5 gap-1.5 flex justify-center items-center">
         <ul className="flex front-medium items-center gap-5">
-          {role === "patient" ? (
+          {role === 'doctor' ? (
             <>
               {" "}
               <li>
                 <Link to="/Home">Home</Link>
               </li>
               <li>
-                <Link to="/admin/compnaies">Company</Link>
+                <Link to="/Admin/appoinment">Appoinment</Link>
               </li>
-              <li>
-                <Link to="/admin/jobs">Jobs</Link>
-              </li>
+              
             </>
           ) : (
             <>

@@ -2,10 +2,13 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { setpatentappoinment } from "../src/Redux/appoinmentSlice";
+import { setpatentappoinment } from "../Redux/appoinmentSlice";
+
 const useGetAppoinment = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
+    
     const fatchappoinment = async () => {
       try {
         const res = await axios.get(

@@ -1,6 +1,6 @@
 import express from "express";
 import pkg from "express-openid-connect";
-import { Appointmentcreat, appointmentsStatus,  deleteappointment, doctorAppointments, patientappointments } from "../controllers/appointment.controller.js";
+import { Appointmentcreat, appointmentsStatus,  deleteappointment, doctorAppointments, getalldoctorappoinment, patientappointments } from "../controllers/appointment.controller.js";
 const { requiresAuth } = pkg;
 const Appointment = express.Router();
 
@@ -46,5 +46,14 @@ Appointment.route("/deleteappointment/:id").delete(
     next();
   },
    deleteappointment
+);
+
+Appointment.route("/appoinment/fordoctor").get(
+  requiresAuth(),
+  (req, res, next) => {
+    req.id = req.oidc.user.sub;
+    next();
+  },
+  getalldoctorappoinment
 );
 export default Appointment;
