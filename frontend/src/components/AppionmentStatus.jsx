@@ -43,10 +43,10 @@ const AppionmentStatus = () => {
                     cat?.status === "cancelled"
                       ? "bg-red-500"
                       : cat?.status === "pending"
-                      ? "bg-gray-600"
+                      ? "bg-yellow-100 text-yellow-700 border-yellow-400"
                       : cat?.status === "completed"
-                      ? "bg-green-400"
-                      : "bg-pink-400"
+                      ? "bg-blue-100 text-blue-700 border-blue-400"
+                      : "bg-green-100 text-green-700 border-green-400"
                   }`}
                 >
                   {cat?.status.toUpperCase()}

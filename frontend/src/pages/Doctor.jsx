@@ -1,73 +1,48 @@
 import React from "react";
 import Navbar from "../shared/Navbar";
+import { useSelector } from "react-redux";
+import { Button } from "../components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Doctor = () => {
-  const doctors = [
-    {
-      name: "Dr. BHASWATI DASGUPTA NATH",
-      specialty: "GENERAL MEDICINE",
-      qualification: "MBBS, MRCP (UK)",
-      img: "https://www.shutterstock.com/image-photo/portrait-handsome-male-doctor-stethoscope-600nw-2480850611.jpg",
-    },
-    {
-      name: "Dr. AVISEK DUTTA",
-      specialty: "ONCOLOGY TEAM",
-      qualification: "MBBS, MS (Gen Surgery), MCh (Urology), MRCS (UK)",
-      img: "https://www.shutterstock.com/image-photo/portrait-handsome-male-doctor-stethoscope-600nw-2480850611.jpg",
-    },
-    {
-      name: "Dr. SOURABH DUTTA",
-      specialty: "GENERAL MEDICINE",
-      qualification: "MBBS, MD (General Medicine)",
-      img: "https://www.shutterstock.com/image-photo/portrait-handsome-male-doctor-stethoscope-600nw-2480850611.jpg",
-    },
-    {
-      name: "Dr. AMIT MANDAL",
-      specialty: "GYNAE ONCOLOGY",
-      qualification:
-        "MBBS, MS (Gynae & Obs), DNB (Gynae & Obs), MCh (Gynaecologic Oncology) AIIMS- New Delhi",
-      img: "https://www.shutterstock.com/image-photo/portrait-handsome-male-doctor-stethoscope-600nw-2480850611.jpg",
-    },
-  ];
+  const { doctor } = useSelector((store) => store.doctor);
+  const naveget = useNavigate();
   return (
     <>
-    <Navbar/>
-    <section className="py-10 px-5 max-w-7xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-center">Our Doctors</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {doctors.map((doc, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200"
-          >
-            <img
-              src={doc.img}
-              alt={doc.name}
-              className="w-full h-60 object-cover"
-            />
-            <div className="p-4">
-              <h3 className="text-indigo-800 font-bold text-lg mb-1">
-                {doc.name}
-              </h3>
-              <p className="font-semibold text-black uppercase text-sm mb-1">
-                {doc.specialty}
-              </p>
-              <p className="text-gray-700 text-sm">{doc.qualification}</p>
+      <Navbar />
+      <section className="py-10 px-5 max-w-7xl mx-auto">
+        <h2 className="text-2xl font-bold mb-6 text-center">Our Doctors</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {doctor.map((doc, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200"
+              onClick={() => naveget(`/DoctorProfile/${doc._id}`)}
+            >
+              <img
+                src={doc?.userId?.profilePicture}
+                alt={doc?.userId?.name}
+                className="w-full h-60 object-cover"
+              />
+              <div className="p-4">
+                <h3 className="text-indigo-800 font-bold text-lg mb-1">
+                  {doc?.userId?.name}
+                </h3>
+                <p className="font-semibold text-black uppercase text-sm mb-1">
+                  {doc?.specialization}
+                </p>
+                <p className="text-gray-700 text-sm">{doc.qualification}</p>
+              </div>
+              <div className="px-4 pb-4 space-y-2">
+                <button className="w-full border border-yellow-500 text-yellow-600 font-medium py-2 rounded hover:bg-yellow-50">
+                  View Details
+                </button>
+              </div>
             </div>
-            <div className="px-4 pb-4 space-y-2">
-              <button className="w-full border border-yellow-500 text-yellow-600 font-medium py-2 rounded hover:bg-yellow-50">
-                View Details
-              </button>
-              <button className="w-full bg-indigo-800 text-white font-medium py-2 rounded hover:bg-indigo-900">
-                Book Appointment
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
     </>
-    
   );
 };
 
