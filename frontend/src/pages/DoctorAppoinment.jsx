@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Navbar from "../shared/Navbar";
 import axios from "axios";
 import { setdoctorAppoinment } from "../Redux/appoinmentSlice";
+import { toast } from "sonner";
 
 const DoctorAppoinment = () => {
   useGetDoctorAppoinment();
@@ -19,20 +20,39 @@ const DoctorAppoinment = () => {
   // Handle status update
   const handleStatusChange = async (appointmentId, newStatus) => {
     try {
-      const res = await axios.patch(
-        `http://localhost:5000/api/v1/Appointment/appointments/${appointmentId}/status`,
-        { status: newStatus },
-        { withCredentials: true }
-      );
-
-      if (res.data.success) {
-         
-        const updatedAppointments = doctorAppoinment.map((app) =>
-          app._id === appointmentId ? { ...app, status: newStatus } : app
+      if (newStatus === "cancelled") {
+        // Call DELETE API for cancellation
+        const res = await axios.delete(
+          `http://localhost:5000/api/v1/Appointment/deleteappointment/${appointmentId}`,
+          { withCredentials: true }
         );
-        dispatch(setdoctorAppoinment(updatedAppointments));
+
+        if (res.data.success) {
+          // Remove cancelled appointment from Redux
+          const updatedAppointments = doctorAppoinment.filter(
+            (app) => app._id !== appointmentId
+          );
+          dispatch(setdoctorAppoinment(updatedAppointments));
+          toast.success(res.data.message)
+        }
+      } else {
+        // Call PATCH API for other status updates
+        const res = await axios.patch(
+          `http://localhost:5000/api/v1/Appointment/appointments/${appointmentId}/status`,
+          { status: newStatus },
+          { withCredentials: true }
+        );
+
+        if (res.data.success) {
+          const updatedAppointments = doctorAppoinment.map((app) =>
+            app._id === appointmentId ? { ...app, status: newStatus } : app
+          );
+          dispatch(setdoctorAppoinment(updatedAppointments));
+           toast.success(res.data.message)
+        }
       }
     } catch (error) {
+       
       console.error("Failed to update status", error);
     }
   };
