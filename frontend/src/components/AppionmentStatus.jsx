@@ -47,7 +47,7 @@ const AppionmentStatus = () => {
 
       setSubmitting(false);
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
       console.error("Error submitting review:", error);
       setSubmitting(false);
     }
@@ -97,7 +97,7 @@ const AppionmentStatus = () => {
                     <Star
                       key={star}
                       className={`h-5 w-5 cursor-pointer ${
-                        selectedRating[cat?.doctorId?._id] >= star
+                        cat?.rating >= star
                           ? "text-yellow-400 fill-yellow-400"
                           : "text-gray-300"
                       }`}

@@ -1,6 +1,7 @@
 import Review from "../models/Review.model.js";
 import User from "../models/User.model.js";
 import Doctor from "../models/Doctor.model.js";
+import Appointment from "../models/Appointment.model.js";
 
 export const addReview = async (req, res) => {
   try {
@@ -23,7 +24,6 @@ export const addReview = async (req, res) => {
       });
     }
 
-     
     const already = await Review.findOne({
       doctorId,
       patientId: user._id,
@@ -36,7 +36,16 @@ export const addReview = async (req, res) => {
       });
     }
 
-     
+    const reatingAppoinment = await Appointment.findOne({
+      doctorId,
+      patientId: user._id,
+    });
+
+    if (reatingAppoinment) {
+      reatingAppoinment.rating = givenrating;
+      const savedAppointment = await reatingAppoinment.save();
+      console.log("Updated appointment rating:", savedAppointment);
+    }
     const review = await Review.create({
       patientId: user._id,
       doctorId,
@@ -44,7 +53,6 @@ export const addReview = async (req, res) => {
       comment,
     });
 
-    
     const reviews = await Review.find({ doctorId });
     const avgRating =
       reviews.reduce((acc, r) => acc + r.givenrating, 0) / reviews.length;
