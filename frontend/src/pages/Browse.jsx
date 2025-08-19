@@ -1,34 +1,14 @@
 import React from "react";
 import Navbar from "../shared/Navbar";
 import { Button } from "../components/ui/button";
+import useGetselectedDoctor from "../hooks/useGetselectedDoctor";
+import { useSelector } from "react-redux";
 
 const Browse = () => {
+  useGetselectedDoctor()
+  const {searchdata} =useSelector((store)=>store.doctor)
+  console.log(searchdata)
   const doctors = [
-    {
-      name: "Dr. BHASWATI DASGUPTA NATH",
-      specialty: "GENERAL MEDICINE",
-      qualification: "MBBS, MRCP (UK)",
-      img: "https://www.shutterstock.com/image-photo/portrait-handsome-male-doctor-stethoscope-600nw-2480850611.jpg",
-    },
-    {
-      name: "Dr. AVISEK DUTTA",
-      specialty: "ONCOLOGY TEAM",
-      qualification: "MBBS, MS (Gen Surgery), MCh (Urology), MRCS (UK)",
-      img: "https://www.shutterstock.com/image-photo/portrait-handsome-male-doctor-stethoscope-600nw-2480850611.jpg",
-    },
-    {
-      name: "Dr. SOURABH DUTTA",
-      specialty: "GENERAL MEDICINE",
-      qualification: "MBBS, MD (General Medicine)",
-      img: "https://www.shutterstock.com/image-photo/portrait-handsome-male-doctor-stethoscope-600nw-2480850611.jpg",
-    },
-    {
-      name: "Dr. AMIT MANDAL",
-      specialty: "GYNAE ONCOLOGY",
-      qualification:
-        "MBBS, MS (Gynae & Obs), DNB (Gynae & Obs), MCh (Gynaecologic Oncology) AIIMS- New Delhi",
-      img: "https://www.shutterstock.com/image-photo/portrait-handsome-male-doctor-stethoscope-600nw-2480850611.jpg",
-    },
   ];
   return (
     <>

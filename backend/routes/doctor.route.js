@@ -6,6 +6,7 @@ import {
   doctors,
   getAllDoctor,
   updateByAdmin,
+  getAllDoctorByQuiry,
 } from "../controllers/doctor.controller.js";
 const { requiresAuth } = pkg;
 const Doctor = express.Router();
@@ -37,5 +38,13 @@ Doctor.route("/isApproved/:id").put(
     next();
   },
    updateByAdmin
+);
+Doctor.route("/find/doctor/quiry").get(
+  requiresAuth(),
+  (req, res, next) => {
+    req.id = req.oidc.user.sub;
+    next();
+  },
+  getAllDoctorByQuiry
 );
 export default Doctor;

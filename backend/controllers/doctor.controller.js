@@ -67,8 +67,9 @@ export const createDoctor = async (req, res) => {
 
 export const getAllDoctor = async (req, res) => {
   try {
-    const AllDoctor = await Doctor.find().sort({ createdAt: -1 })
-      .populate({ path: "userId", options: { sort: { createdAt: -1 } } });;
+    const AllDoctor = await Doctor.find()
+      .sort({ createdAt: -1 })
+      .populate({ path: "userId", options: { sort: { createdAt: -1 } } });
     if (!AllDoctor) {
       return res.status(400).json({
         message: "DOctor not availble",
@@ -136,6 +137,20 @@ export const updateByAdmin = async (req, res) => {
       message: "doctor is Approved",
       updateDoctor,
       succes: true,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllDoctorByQuiry = async (req, res) => {
+  try {
+    const findElement = req.query.findElement || "" ;
+    const findDOctor = await Doctor.find({ specialization: findElement });
+    return res.status(200).json({
+      message: "doctor found ",
+      findDOctor,
+      success: true,
     });
   } catch (error) {
     console.log(error);
