@@ -28,7 +28,7 @@ const Specialities = () => {
       img: "https://www.practostatic.com/acred/search-assets/2/12-mental-wellness.png",
     },
   ];
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <section className="py-16 px-6 bg-white">
       <div className="max-w-7xl mx-auto">
@@ -51,8 +51,11 @@ const Specialities = () => {
         {/* Grid of items */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 text-center">
           {items.map((item, index) => (
-            <div key={index} className="flex flex-col items-center" onClick={()=>navigate(`/Browse`)} >
-               
+            <div
+              key={index}
+              className="flex flex-col items-center"
+              onClick={() => navigate(`/Browse`)}
+            >
               <div className="w-28 h-28 rounded-full flex items-center justify-center bg-gray-100 mb-4 shadow-sm hover:shadow-lg">
                 <img
                   src={item.img}
@@ -61,12 +64,10 @@ const Specialities = () => {
                 />
               </div>
 
-             
               <h3 className="text-sm font-medium text-gray-800">
                 {item.title}
               </h3>
 
-             
               <a
                 href="#"
                 className="mt-2 text-blue-500 font-medium text-sm hover:underline"

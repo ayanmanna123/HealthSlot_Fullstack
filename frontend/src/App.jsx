@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import DoctorProfile from "./pages/DoctorProfile ";
 import DoctorAppoinment from "./pages/DoctorAppoinment";
 import ApplyAppoinment from "./pages/ApplyAppoinment";
+import Map from "./pages/Map";
 function App() {
   const approuter = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ function App() {
      {
       path: "/appointment/:id",
       element:<ApplyAppoinment/>
+    },
+      {
+      path: "/find/map",
+      element:<Map/>
     },
   ]);
   return (
