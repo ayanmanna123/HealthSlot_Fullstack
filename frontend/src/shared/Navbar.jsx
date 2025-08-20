@@ -21,7 +21,7 @@ const Navbar = () => {
       try {
         dispatch(setLoding(true));
         const res = await axios.get(
-          "http://localhost:5000/api/v1/user/getUserDetails",
+          "https://health-slot-fullstack.vercel.app/api/v1/user/getUserDetails",
           {
             withCredentials: true,
           }
