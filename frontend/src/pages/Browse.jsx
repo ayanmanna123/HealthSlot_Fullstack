@@ -15,7 +15,7 @@ const Browse = () => {
         <h2 className="text-2xl font-bold mb-6 text-center">Our Doctors</h2>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {searchdata?.map((doc, index) => (
+          {searchdata.map((doc, index) => (
             <div
               key={index}
               className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200"

@@ -16,16 +16,6 @@ dotenv.config();
 
 const app = express();
 
-const corsOptions = {
-  origin: [
-    "http://localhost:5173",
-    "https://health-slot-fullstack-9zf9.vercel.app",
-    "https://health-slot-fullstack.vercel.app", 
-  ],
-  credentials: true,
-};
-app.use(cors(corsOptions));
-
 const config = {
   authRequired: false,
   auth0Logout: true,
@@ -75,6 +65,15 @@ app.get("/", async (req, res) => {
     return res.redirect(process.env.CLIENT_URL);
   }
 });
+
+const corsOptions = {
+  origin: [
+    "http://localhost:5173",
+    "https://jobflux-full-stack-8sja.vercel.app",
+  ],
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 app.use("/api/v1/user", router);
 app.use("/api/v1/Doctor", Doctor);
