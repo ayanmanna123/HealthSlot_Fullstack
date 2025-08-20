@@ -58,7 +58,7 @@ const Catagorycomponent = () => {
       {/* Carousel */}
       <Carousel className="relative">
         <CarouselContent>
-          {doctor.map((cat, index) => (
+          {doctor?.map((cat, index) => (
             <div
               key={index}
               onClick={() => navigate(`/DoctorProfile/${cat._id}`)}

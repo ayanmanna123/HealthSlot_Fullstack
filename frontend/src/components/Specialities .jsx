@@ -50,7 +50,7 @@ const Specialities = () => {
 
         {/* Grid of items */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 text-center">
-          {items.map((item, index) => (
+          {items?.map((item, index) => (
             <div
               key={index}
               className="flex flex-col items-center"

@@ -69,7 +69,7 @@ const AppionmentStatus = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {patentappoinment.map((cat, index) => (
+          {patentappoinment?.map((cat, index) => (
             <TableRow key={index}>
               <TableCell>{cat?.createdAt?.split("T")[0]}</TableCell>
               <TableCell>{cat?.time}</TableCell>

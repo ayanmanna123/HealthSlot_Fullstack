@@ -93,7 +93,7 @@ const ApplyAppoinment = () => {
         >
           <option value="">Select Time</option>
           {timeSlots &&
-            Object.entries(timeSlots).map(([key, value], idx) => (
+            Object.entries(timeSlots)?.map(([key, value], idx) => (
               <option key={idx} value={value}>
                 {value}
               </option>

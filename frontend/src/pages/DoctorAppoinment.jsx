@@ -107,7 +107,7 @@ const DoctorAppoinment = () => {
                       handleStatusChange(appointment._id, e.target.value)
                     }
                   >
-                    {statusOptions.map((status, i) => (
+                    {statusOptions?.map((status, i) => (
                       <option key={i} value={status}>
                         {status.charAt(0).toUpperCase() + status.slice(1)}
                       </option>
