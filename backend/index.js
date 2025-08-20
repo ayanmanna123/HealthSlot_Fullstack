@@ -20,6 +20,7 @@ const corsOptions = {
   origin: [
     "http://localhost:5173",
     "https://health-slot-fullstack-9zf9.vercel.app",
+    "https://health-slot-fullstack.vercel.app", 
   ],
   credentials: true,
 };
