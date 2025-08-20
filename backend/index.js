@@ -57,17 +57,17 @@ const enusureUserInDB = asyncHandler(async (user) => {
 app.get("/", async (req, res) => {
   if (req.oidc.isAuthenticated()) {
     await enusureUserInDB(req.oidc.user);
-
-    return res.redirect(process.env.CLIENT_URL);
-  } else {
-    return res.redirect(process.env.CLIENT_URL);
+    return res.status(200).json({
+      message: "user is login",
+      success: true,
+    });
   }
 });
 
 const corsOptions = {
   origin: [
     "http://localhost:5173",
-    "https://jobflux-full-stack-8sja.vercel.app",
+    "https://health-slot-fullstack-9zf9.vercel.app",
   ],
   credentials: true,
 };
