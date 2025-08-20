@@ -63,7 +63,7 @@ const enusureUserInDB = asyncHandler(async (user) => {
     console.log("Error checking or adding user to db", error.message);
   }
 });
-app.get("/chake", async (req, res) => {
+app.get("/", async (req, res) => {
   if (req.oidc.isAuthenticated()) {
     // check if Auth0 user exists in the db
     await enusureUserInDB(req.oidc.user);
@@ -73,11 +73,6 @@ app.get("/chake", async (req, res) => {
   } else {
     return res.redirect(process.env.CLIENT_URL);
   }
-});
-app.get("/", async (req, res) => {
-  return res.status(200).json({
-    message: " iam fron backend",
-  });
 });
 
 app.use("/api/v1/user", router);
