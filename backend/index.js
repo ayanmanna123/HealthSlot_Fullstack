@@ -56,10 +56,8 @@ const enusureUserInDB = asyncHandler(async (user) => {
 });
 app.get("/", async (req, res) => {
   if (req.oidc.isAuthenticated()) {
-    // check if Auth0 user exists in the db
     await enusureUserInDB(req.oidc.user);
 
-    // redirect to the frontend
     return res.redirect(process.env.CLIENT_URL);
   } else {
     return res.redirect(process.env.CLIENT_URL);
