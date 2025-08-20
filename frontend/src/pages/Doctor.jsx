@@ -13,7 +13,7 @@ const Doctor = () => {
       <section className="py-10 px-5 max-w-7xl mx-auto">
         <h2 className="text-2xl font-bold mb-6 text-center">Our Doctors</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {doctor.map((doc, index) => (
+          {doctor?.map((doc, index) => (
             <div
               key={index}
               className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200"

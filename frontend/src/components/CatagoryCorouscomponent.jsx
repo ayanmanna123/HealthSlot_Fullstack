@@ -53,7 +53,7 @@ const CatagoryCorouscomponent = () => {
     <div>
       <Carousel className="w-full max-w-2xl mx-auto my-8">
         <CarouselContent>
-          {categories.map((cat, index) => (
+          {categories?.map((cat, index) => (
             <CarouselItem key={index} className="md:basis-1/4 lg-basis-1/5">
               <Button
                 variant="outline"

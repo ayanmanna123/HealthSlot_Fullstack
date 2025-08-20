@@ -44,7 +44,7 @@ const DoctorAppoinment = () => {
         );
 
         if (res.data.success) {
-          const updatedAppointments = doctorAppoinment.map((app) =>
+          const updatedAppointments = doctorAppoinment?.map((app) =>
             app._id === appointmentId ? { ...app, status: newStatus } : app
           );
           dispatch(setdoctorAppoinment(updatedAppointments));
@@ -107,7 +107,7 @@ const DoctorAppoinment = () => {
                       handleStatusChange(appointment._id, e.target.value)
                     }
                   >
-                    {statusOptions.map((status, i) => (
+                    {statusOptions?.map((status, i) => (
                       <option key={i} value={status}>
                         {status.charAt(0).toUpperCase() + status.slice(1)}
                       </option>

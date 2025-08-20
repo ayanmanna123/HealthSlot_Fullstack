@@ -97,7 +97,7 @@ const DoctorProfile = () => {
                 </tr>
               </thead>
               <tbody>
-                {clinicTime.map((cat, index) => (
+                {clinicTime?.map((cat, index) => (
                   <tr key={index} className="odd:bg-gray-50 even:bg-white">
                     <td className="border border-gray-300 px-4 py-2 font-semibold">
                       {cat}
