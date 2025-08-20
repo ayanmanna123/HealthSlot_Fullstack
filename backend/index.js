@@ -56,18 +56,20 @@ const enusureUserInDB = asyncHandler(async (user) => {
 });
 app.get("/", async (req, res) => {
   if (req.oidc.isAuthenticated()) {
+    // check if Auth0 user exists in the db
     await enusureUserInDB(req.oidc.user);
-    return res.status(200).json({
-      message: "user is login",
-      success: true,
-    });
+
+    // redirect to the frontend
+    return res.redirect(process.env.CLIENT_URL);
+  } else {
+    return res.redirect(process.env.CLIENT_URL);
   }
 });
 
 const corsOptions = {
   origin: [
     "http://localhost:5173",
-    "https://health-slot-fullstack-9zf9.vercel.app",
+    "https://jobflux-full-stack-8sja.vercel.app",
   ],
   credentials: true,
 };
