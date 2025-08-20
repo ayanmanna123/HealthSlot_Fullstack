@@ -69,7 +69,7 @@ app.get("/", async (req, res) => {
 const corsOptions = {
   origin: [
     "http://localhost:5173",
-    "https://jobflux-full-stack-8sja.vercel.app",
+    "https://health-slot-fullstack.vercel.app/",
   ],
   credentials: true,
 };
