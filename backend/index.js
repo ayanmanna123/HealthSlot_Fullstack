@@ -25,7 +25,6 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-
 const config = {
   authRequired: false,
   auth0Logout: true,
@@ -75,8 +74,11 @@ app.get("/chake", async (req, res) => {
     return res.redirect(process.env.CLIENT_URL);
   }
 });
-
-
+app.get("/", async (req, res) => {
+  return res.status(200).json({
+    message: " iam fron backend",
+  });
+});
 
 app.use("/api/v1/user", router);
 app.use("/api/v1/Doctor", Doctor);
