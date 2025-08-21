@@ -21,7 +21,7 @@ const Navbar = () => {
       try {
         dispatch(setLoding(true));
         const res = await axios.get(
-          "https://health-slot-fullstack-2m1p.vercel.app/api/v1/user/getUserDetails",
+          "https://health-slot-fullstack.vercel.app/api/v1/user/getUserDetails",
           {
             withCredentials: true,
           }
@@ -80,11 +80,11 @@ const Navbar = () => {
 
         {!user ? (
           <div className="items-center gap-2 flex">
-            <Link to="https://health-slot-fullstack-2m1p.vercel.app/login">
+            <Link to="https://health-slot-fullstack.vercel.app/login">
               <Button variant="outline">Login</Button>
             </Link>
 
-            <Link to="https://health-slot-fullstack-2m1p.vercel.app/login">
+            <Link to="https://health-slot-fullstack.vercel.app/login">
               <Button className="bg-[#6A38C2] hover:bg-[#5b30a6]">
                 Sign up
               </Button>
@@ -128,7 +128,7 @@ const Navbar = () => {
                 </div>
                 <div className="flex w-fit items-center gap-2 cursor-pointer">
                   <LogOut />
-                  <Link to="https://health-slot-fullstack-2m1p.vercel.app/logout">
+                  <Link to="https://health-slot-fullstack.vercel.app/logout">
                     <Button variant="link">Logout</Button>
                   </Link>
                 </div>
