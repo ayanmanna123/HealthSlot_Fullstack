@@ -16,6 +16,7 @@ dotenv.config();
 
 const app = express();
 
+// 🔑 Auth0 Config
 const config = {
   authRequired: false,
   auth0Logout: true,
@@ -23,8 +24,16 @@ const config = {
   baseURL: process.env.BASE_URL,
   clientID: process.env.CLIENT_ID,
   issuerBaseURL: process.env.ISSUER_BASE_URL,
+  session: {
+    rollingDuration: 60 * 60, // 1 hour
+    cookie: {
+      secure: true,      // ✅ needed for HTTPS
+      sameSite: "none",  // ✅ allow cross-origin cookies
+    },
+  },
 };
 
+// 🔑 CORS Config
 const corsOptions = {
   origin: [
     "http://localhost:5173",
@@ -34,16 +43,20 @@ const corsOptions = {
   credentials: true,
 };
 
-// ✅ Apply CORS before anything else
+// ✅ Apply CORS first
 app.use(cors(corsOptions));
+
+// ✅ Trust proxy (important for secure cookies on Vercel/Heroku/Proxies)
+app.set("trust proxy", 1);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// ✅ Auth after cors
+// ✅ Auth middleware (after CORS & cookies)
 app.use(auth(config));
 
+// 🔑 Ensure user exists in DB
 const ensureUserInDB = asyncHandler(async (user) => {
   try {
     const existingUser = await User.findOne({ auth0Id: user.sub });
@@ -65,6 +78,7 @@ const ensureUserInDB = asyncHandler(async (user) => {
   }
 });
 
+// 🔑 Root route
 app.get("/", async (req, res) => {
   if (req.oidc.isAuthenticated()) {
     await ensureUserInDB(req.oidc.user);
@@ -74,19 +88,21 @@ app.get("/", async (req, res) => {
   }
 });
 
+// 🔑 API Routes
 app.use("/api/v1/user", router);
 app.use("/api/v1/Doctor", Doctor);
 app.use("/api/v1/Appointment", Appointment);
 app.use("/api/v1/review", review);
 
+// 🔑 Start server
 const server = async () => {
   try {
     await connectToMongo();
     app.listen(process.env.PORT, () => {
-      console.log(`Server is running on port ${process.env.PORT}`);
+      console.log(`✅ Server running on port ${process.env.PORT}`);
     });
   } catch (error) {
-    console.log("Server error", error.message);
+    console.log("❌ Server error:", error.message);
     process.exit(1);
   }
 };
