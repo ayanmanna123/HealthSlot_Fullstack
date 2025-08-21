@@ -29,7 +29,7 @@ const Catagorycomponent = () => {
     const fetchUser = async () => {
       try {
         const res = await axios.get(
-          "https://health-slot-fullstack-2m1p.vercel.app/api/v1/Doctor/getAllDoctor",
+          "https://health-slot-fullstack.vercel.app/api/v1/Doctor/getAllDoctor",
           {
             withCredentials: true,
           }
