@@ -70,10 +70,12 @@ const corsOptions = {
   origin: [
     "http://localhost:5173",
     "https://health-slot-fullstack-hgph.vercel.app",
-    "https://health-slot-fullstack.vercel.app"
+    "https://health-slot-fullstack.vercel.app",
   ],
   credentials: true,
 };
+app.use(cors(corsOptions));
+
 app.use(cors(corsOptions));
 
 app.use("/api/v1/user", router);
