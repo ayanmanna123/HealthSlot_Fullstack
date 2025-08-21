@@ -43,7 +43,7 @@ const ProfileUpdateDialog = ({ open, setopen }) => {
 
     try {
       const res = await axios.put(
-        "http://localhost:5000/api/v1/user/updateProfile",
+        "https://health-slot-fullstack.vercel.app/api/v1/user/updateProfile",
         formData,
         {
           headers: { "Content-Type": "application/json" },

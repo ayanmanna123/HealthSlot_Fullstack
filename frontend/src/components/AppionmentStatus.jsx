@@ -28,7 +28,7 @@ const AppionmentStatus = () => {
     try {
       setSubmitting(true);
       const res = await axios.post(
-        "http://localhost:5000/api/v1/review/addReview",
+        "https://health-slot-fullstack.vercel.app/api/v1/review/addReview",
         {
           doctorId,
           givenrating: rating,

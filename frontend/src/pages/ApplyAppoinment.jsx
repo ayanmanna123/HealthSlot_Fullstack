@@ -47,7 +47,7 @@ const ApplyAppoinment = () => {
       const doctorId = singelDoctor?._id;
 
       const res = await axios.post(
-        "http://localhost:5000/api/v1/Appointment/Appointment",
+        "https://health-slot-fullstack.vercel.app/api/v1/Appointment/Appointment",
         {
           doctorId,
           date,

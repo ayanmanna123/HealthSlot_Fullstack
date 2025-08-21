@@ -16,7 +16,7 @@ const DoctorProfile = () => {
     const fetchSingledoctor = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/v1/Doctor/Doctors/${doctorid}`,
+          `https://health-slot-fullstack.vercel.app/api/v1/Doctor/Doctors/${doctorid}`,
           {
             withCredentials: true,
           }
@@ -35,7 +35,7 @@ const DoctorProfile = () => {
   const handleBookAppointment = async () => {
   try {
     const res = await axios.post(
-      "http://localhost:5000/api/v1/Appointment/Appointment",
+      "https://health-slot-fullstack.vercel.app/api/v1/Appointment/Appointment",
       {
         doctorId: singelDoctor._id, // or use doctorid from params
         date: new Date().toISOString().split("T")[0], // today’s date for now

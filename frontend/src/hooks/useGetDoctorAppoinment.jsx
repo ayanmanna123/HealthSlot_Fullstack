@@ -9,7 +9,7 @@ const useGetDoctorAppoinment = () => {
     const alldoctorappoinment = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/v1/Appointment/appoinment/fordoctor",
+          "https://health-slot-fullstack.vercel.app/api/v1/Appointment/appoinment/fordoctor",
           { withCredentials: true }
         );
         if (res.data.success) {

@@ -23,7 +23,7 @@ const DoctorAppoinment = () => {
       if (newStatus === "cancelled") {
         // Call DELETE API for cancellation
         const res = await axios.delete(
-          `http://localhost:5000/api/v1/Appointment/deleteappointment/${appointmentId}`,
+          `https://health-slot-fullstack.vercel.app/api/v1/Appointment/deleteappointment/${appointmentId}`,
           { withCredentials: true }
         );
 
@@ -38,7 +38,7 @@ const DoctorAppoinment = () => {
       } else {
         // Call PATCH API for other status updates
         const res = await axios.patch(
-          `http://localhost:5000/api/v1/Appointment/appointments/${appointmentId}/status`,
+          `https://health-slot-fullstack.vercel.app/api/v1/Appointment/appointments/${appointmentId}/status`,
           { status: newStatus },
           { withCredentials: true }
         );

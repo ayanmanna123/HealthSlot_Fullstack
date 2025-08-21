@@ -11,7 +11,7 @@ const useGetselectedDoctor = () => {
     const getselectedDoctor = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/v1/Doctor/find/doctor/quiry?findElement=${searchword}`,
+          `https://health-slot-fullstack.vercel.app/api/v1/Doctor/find/doctor/quiry?findElement=${searchword}`,
           { withCredentials: true }
         );
         if (res?.status) {

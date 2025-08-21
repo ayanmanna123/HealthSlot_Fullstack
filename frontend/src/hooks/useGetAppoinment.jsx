@@ -12,7 +12,7 @@ const useGetAppoinment = () => {
     const fatchappoinment = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/v1/Appointment/patientappointments",
+          "https://health-slot-fullstack.vercel.app/api/v1/Appointment/patientappointments",
           { withCredentials: true }
         );
         console.log(res.data);
