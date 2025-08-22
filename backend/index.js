@@ -28,14 +28,17 @@ const config = {
 const corsOptions = {
   origin: [
     "http://localhost:5173",
-    "https://health-slot-fullstack-hgph.vercel.app"
-     
+    "https://health-slot-fullstack-hgph.vercel.app",
+    "https://health-slot-fullstack.vercel.app",
   ],
   credentials: true,
 };
-
-// ✅ Apply CORS before anything else
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: true, // reflect request origin
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
